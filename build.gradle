@@ -23,3 +23,12 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+bootBuildImage {
+    imageName = "sogis/${project.name}:latest"
+}
+
+// https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image-customization
+// https://paketo.io/docs/buildpacks/language-family-buildpacks/java/#runtime-jvm-configuration
+// https://github.com/paketo-buildpacks/bellsoft-liberica
+
