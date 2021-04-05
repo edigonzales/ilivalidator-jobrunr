@@ -6,6 +6,12 @@
 - Reicht Autowired Datasource? Ja.
 - Schema-Support?
 
+## Database storage
+```
+docker-compose build
+docker-compose up -d edit-db
+```
+
 ## Runtime tests
 
 ### Same image twice
