@@ -3,6 +3,8 @@ package ch.so.agi.ilivalidator;
 import java.time.Duration;
 import java.time.Instant;
 
+import javax.sql.DataSource;
+
 import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class JobController {
-    
+    @Autowired
+    DataSource dataSource;
+
     @Autowired
     private JobScheduler jobScheduler;
 
