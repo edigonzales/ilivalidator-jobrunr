@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "com.gorylenko.gradle-git-properties" version "2.2.4"    
 }
 
 group = 'io.github.sogis'
@@ -10,14 +11,19 @@ sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
+    maven { url "http://jars.interlis.ch/" }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.jobrunr:jobrunr-spring-boot-starter:1.3.1'
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
-    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.34.0'
+    //implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
+    implementation 'org.xerial:sqlite-jdbc:3.34.0'
+    implementation 'ch.interlis:ilivalidator:1.11.9'
+    implementation platform('software.amazon.awssdk:bom:2.15.33')
+    implementation 'software.amazon.awssdk:s3'
+
     compile("org.springframework.boot:spring-boot-starter-actuator")
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -26,8 +32,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    failFast = true
+    testLogging {
+        showStandardStreams = true
+    }   
 }
 
+// TODO: if -SNAPSHOT then latest else ...
 bootBuildImage {
     imageName = "sogis/${project.name}:latest"
 }
@@ -35,4 +46,8 @@ bootBuildImage {
 // https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image-customization
 // https://paketo.io/docs/buildpacks/language-family-buildpacks/java/#runtime-jvm-configuration
 // https://github.com/paketo-buildpacks/bellsoft-liberica
+
+gitProperties {
+    failOnNoGitDirectory = false
+}
 
