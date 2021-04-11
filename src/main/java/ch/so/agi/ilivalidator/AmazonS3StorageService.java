@@ -34,6 +34,8 @@ public class AmazonS3StorageService implements StorageService {
     @Value("${app.s3Region}")
     private String s3Region;
 
+//    private S3Client s3client;
+    
     @Override
     public void store(MultipartFile file, String filename) throws IOException {
         AwsCredentialsProvider creds = StaticCredentialsProvider.create(AwsBasicCredentials.create(s3AccessKey, s3SecretKey));
